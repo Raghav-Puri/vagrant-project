@@ -5,17 +5,18 @@
 Vagrant.configure("2") do |config|
  
   config.vm.box = "ubuntu/trusty64"
+  config.vm.hostname = "tomcat8"
 
  
-  # config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
+  config.vm.network "forwarded_port", guest: 8080, host: 8080, host_ip: "127.0.0.1"
+  
+  config.vm.provision "shell", path: "provision-tomcat.sh"
 
  
-  # config.vm.provider "virtualbox" do |vb|
-  #   # Display the VirtualBox GUI when booting the machine
-  #   vb.gui = true
-  #
-  #   # Customize the amount of memory on the VM:
-  #   vb.memory = "1024"
-  # end
+  config.vm.provider "virtualbox" do |vb|
+  vb.name = "TomcatDev"
+  vb.memory = "1024"
+  vb.cpus = 2
+  end
   
 end
